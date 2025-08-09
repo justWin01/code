@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iPhone Style Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-200">
+
+  <!-- Phone Frame -->
+  <div class="bg-black rounded-[3rem] p-4 shadow-2xl border-4 border-gray-900" style="width: 380px; height: 750px;">
+    
+    <!-- Screen Area -->
+    <div class="bg-gray-900 rounded-2xl p-4 flex flex-col justify-between h-full">
+      
+      <!-- Display -->
+      <div id="display" class="bg-black text-white text-right text-4xl font-mono rounded-lg p-4 mb-4 overflow-x-auto">
+        0
+      </div>
+      
+      <!-- Buttons -->
+      <div class="grid grid-cols-4 gap-3">
+        <button class="bg-gray-400 text-black rounded-full text-2xl py-4" onclick="clearDisplay()">AC</button>
+        <button class="bg-gray-400 text-black rounded-full text-2xl py-4" onclick="appendValue('+/-')">+/-</button>
+        <button class="bg-gray-400 text-black rounded-full text-2xl py-4" onclick="appendValue('%')">%</button>
+        <button class="bg-orange-500 text-white rounded-full text-2xl py-4" onclick="appendValue('/')">÷</button>
+
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('7')">7</button>
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('8')">8</button>
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('9')">9</button>
+        <button class="bg-orange-500 text-white rounded-full text-2xl py-4" onclick="appendValue('*')">×</button>
+
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('4')">4</button>
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('5')">5</button>
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('6')">6</button>
+        <button class="bg-orange-500 text-white rounded-full text-2xl py-4" onclick="appendValue('-')">−</button>
+
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('1')">1</button>
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('2')">2</button>
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('3')">3</button>
+        <button class="bg-orange-500 text-white rounded-full text-2xl py-4" onclick="appendValue('+')">+</button>
+
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4 col-span-2" onclick="appendValue('0')">0</button>
+        <button class="bg-gray-700 text-white rounded-full text-2xl py-4" onclick="appendValue('.')">.</button>
+        <button class="bg-orange-500 text-white rounded-full text-2xl py-4" onclick="calculateResult()">=</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById("display");
+
+    function appendValue(value) {
+      if (display.textContent === "0" && value !== ".") {
+        display.textContent = value;
+      } else {
+        display.textContent += value;
+      }
+    }
+
+    function clearDisplay() {
+      display.textContent = "0";
+    }
+
+    function calculateResult() {
+      try {
+        display.textContent = eval(display.textContent.replace('×', '*').replace('÷', '/'));
+      } catch {
+        display.textContent = "Error";
+      }
+    }
+  </script>
+
+</body>
+</html>
